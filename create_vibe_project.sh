@@ -128,18 +128,40 @@ setup_environment() {
         print_warning "No .env or env_template.txt found. You may need to create .env manually"
     fi
     
-    # Install dependencies
+    # Install dependencies in conda environment
     print_status "Installing dependencies..."
-    if command_exists pip; then
+    if command_exists conda && conda env list | grep -q "vibes"; then
+        print_status "Activating vibes environment for dependency installation..."
+        # Source conda if needed
+        if [[ -f "$(conda info --base)/etc/profile.d/conda.sh" ]]; then
+            source "$(conda info --base)/etc/profile.d/conda.sh"
+        fi
+        conda activate vibes
+        pip install -r requirements.txt
+        print_success "Dependencies installed in vibes environment"
+    elif command_exists pip; then
+        print_warning "Installing in current environment (not vibes)"
         pip install -r requirements.txt
         print_success "Dependencies installed"
     else
         print_warning "pip not found. Please install dependencies manually: pip install -r requirements.txt"
     fi
     
-    # Install Playwright browsers
+    # Install Playwright browsers in conda environment
     print_status "Installing Playwright browsers..."
-    if command_exists playwright; then
+    if command_exists conda && conda env list | grep -q "vibes"; then
+        # Ensure we're in the vibes environment
+        if [[ -f "$(conda info --base)/etc/profile.d/conda.sh" ]]; then
+            source "$(conda info --base)/etc/profile.d/conda.sh"
+        fi
+        conda activate vibes
+        if command_exists playwright; then
+            playwright install
+            print_success "Playwright browsers installed in vibes environment"
+        else
+            print_warning "playwright not found. Please install manually: playwright install"
+        fi
+    elif command_exists playwright; then
         playwright install
         print_success "Playwright browsers installed"
     else
