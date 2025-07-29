@@ -65,7 +65,13 @@ check_prerequisites() {
 # Get project name from user
 get_project_name() {
     print_status "Enter project name (should start with 'vibe-'):"
-    read -e -i "vibe-" PROJECT_NAME
+    echo -n "vibe-"
+    read PROJECT_NAME
+    
+    # Prepend "vibe-" if user didn't include it
+    if [[ ! "$PROJECT_NAME" =~ ^vibe- ]]; then
+        PROJECT_NAME="vibe-$PROJECT_NAME"
+    fi
     
     # Remove any leading/trailing whitespace
     PROJECT_NAME=$(echo "$PROJECT_NAME" | xargs)
