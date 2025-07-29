@@ -1,0 +1,122 @@
+# Vibe Coding Template - Cursor Rules for AI Agents
+
+## Project Context and History
+
+This is the Vibe Coding Template project - a system designed to enable AI-assisted coding workflows with autonomous iteration loops. The project has experienced significant degradation in functionality over time due to over-engineering and poor architectural decisions.
+
+### Critical Project History Lessons
+
+**DO NOT REPEAT THESE MISTAKES:**
+
+1. **NEVER isolate the test-app from git tracking** - This was done in commit `6e8ae5986a2103948db18637c1c5a8398856218c` and caused complete loss of version control for the actual application being developed. Always keep the test-app under version control in the main repository.
+
+2. **AVOID over-engineering workflows** - The project became complex with multiple workflow scripts (`start_vibe_coding.sh`, `continue_vibe_coding.sh`, `vibe_common.sh`) that added complexity without clear benefits. Keep workflows simple and focused.
+
+3. **DON'T add complex features without clear need** - The Mandelbrot set implementation (commit `73c89a03a0031ddf2f40001ebe97bd2d41c9ea96`) may have introduced performance issues and was unnecessary for the core functionality.
+
+4. **AVOID inconsistent AI tool integration** - Multiple attempts to fix Aider integration created unreliable AI-assisted development workflows.
+
+### Working State Reference
+
+The last known working state was around commit `6f170e40a4d8cf1e4bd2d422d3ecd24e655fba08` which had:
+- Clean, simple template structure
+- Working test-app with Vite
+- Basic AI loop functionality
+- Clear documentation
+- Test-app properly under version control
+
+### Current State Issues
+
+The project currently has:
+- Test-app isolated from git tracking (major problem)
+- Over-complicated workflow scripts
+- Complex git isolation mechanisms
+- Inconsistent Aider integration
+- Multiple documentation files that may be outdated
+
+## Development Guidelines
+
+### Core Principles
+
+1. **Simplicity First** - Always prefer simple solutions over complex ones
+2. **Version Control Everything** - Never remove files from git tracking without clear justification
+3. **Incremental Changes** - Make small, testable changes and verify functionality after each change
+4. **Focus on Core Functionality** - The main goal is AI-assisted coding workflows, not complex visualizations
+
+### File Structure to Maintain
+
+```
+vibe_coding_template/
+├── playloop.py (core AI loop - keep simple)
+├── demo_vibe_loop.py (demo functionality)
+├── test_setup.py (environment testing)
+├── test-app/ (simple Vite app - MUST stay in git)
+├── setup_*.sh (environment setup)
+├── run_*.sh (execution scripts)
+├── requirements.txt (Python dependencies)
+└── README.md (documentation)
+```
+
+### What to Avoid
+
+1. **Complex git isolation** - Don't create separate git repos for test-app
+2. **Over-engineered workflows** - Don't create multiple complex workflow scripts
+3. **Unnecessary features** - Don't add complex visualizations or features without clear need
+4. **Breaking changes** - Don't make changes that break the core AI loop functionality
+
+### Testing Requirements
+
+1. **Always test the AI loop** - Verify that `playloop.py` works correctly
+2. **Test app creation** - Ensure `create_initial_app.py` can create working apps
+3. **Test environment setup** - Verify all setup scripts work
+4. **Test the demo** - Ensure `demo_vibe_loop.py` runs successfully
+
+### When Making Changes
+
+1. **Start with the working state** - Use commit `6f170e40a4d8cf1e4bd2d422d3ecd24e655fba08` as reference
+2. **Make one change at a time** - Don't make multiple unrelated changes
+3. **Test immediately** - Test functionality after each change
+4. **Document changes** - Update README.md and other documentation
+5. **Keep it simple** - If a change makes things more complex, reconsider it
+
+### Emergency Recovery
+
+If the project becomes broken again:
+1. Revert to commit `6f170e40a4d8cf1e4bd2d422d3ecd24e655fba08`
+2. Remove all complex workflow scripts
+3. Ensure test-app is back under git tracking
+4. Simplify playloop.py to basic functionality
+5. Test core functionality before making any new changes
+
+## Specific File Guidelines
+
+### playloop.py
+- Keep it simple and focused on AI loop functionality
+- Don't add complex error handling that makes it hard to debug
+- Maintain the core autonomous iteration capability
+
+### test-app/
+- MUST remain under git tracking
+- Keep it simple - basic Vite app is sufficient
+- Don't add complex visualizations unless absolutely necessary
+
+### Workflow Scripts
+- Prefer simple shell scripts over complex Python scripts
+- Don't create multiple workflow scripts - keep it minimal
+- Focus on core functionality: setup, run, demo
+
+### Documentation
+- Keep README.md clear and up-to-date
+- Don't create multiple documentation files unless necessary
+- Focus on getting new developers up and running quickly
+
+## Success Metrics
+
+A successful change should:
+1. Maintain or improve the core AI loop functionality
+2. Keep the test-app working and under version control
+3. Not add unnecessary complexity
+4. Make the project easier to understand and use
+5. Pass all basic functionality tests
+
+Remember: This project is about AI-assisted coding workflows, not about creating the most complex or feature-rich system. Keep it simple, focused, and working. 
