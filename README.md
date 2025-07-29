@@ -89,8 +89,9 @@ python playloop.py
 ```
 
 ### Full Mode (Requires API Key)
-1. Start your development server (if using Vite):
+1. Start your development server:
    ```bash
+   cd test-app
    npm run dev
    ```
 
@@ -124,8 +125,8 @@ python playloop.py
 
 ### Scripts
 - `create_vibe_project.sh` - Project creation helper (creates local repo, GitHub optional)
-- `run_demo.sh` - Demo runner script
-- `run_vibe_test.sh` - Full vibe loop runner
+- `run_demo.sh` - Demo runner (no API key required, uses mock data)
+- `run_vibe_test.sh` - Full vibe loop runner (starts test app + runs AI loop)
 - `setup_env.sh` - Environment activation helper
 
 ### Configuration
@@ -146,6 +147,7 @@ python playloop.py
 - **Environment setup**: Always activate the conda environment before running: `conda activate vibes`
 - **API key management**: Keep your `.env` file gitignored and secure
 - **Fast iteration**: Create local projects first, push to GitHub only when ready
+- **Test your setup**: Run `python test_setup.py` to verify everything is working
 
 ## Troubleshooting
 
