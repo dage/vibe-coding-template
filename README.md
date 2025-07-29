@@ -1,6 +1,6 @@
 # Vibe Coding Template - AI-Powered Development Workflow
 
-This project provides a clean, working template for AI-assisted coding workflows using Aider, DeepInfra's vision and code models, and Playwright for screenshot analysis. The template is designed to enable autonomous iteration loops with minimal human intervention.
+This project provides a clean, working template for AI-assisted coding workflows using Aider, DeepInfra's open-source vision and code models, and Playwright for screenshot analysis. The template is designed to be cost-efficient by using open-source models at DeepInfra instead of traditional frontier models, and offers ease of setup by staying within the DeepInfra ecosystem, allowing you to use the same credits pool for all models - both code generation and vision analysis.
 
 ## Quick Start
 
