@@ -186,13 +186,16 @@ setup_environment() {
 provide_next_steps() {
     print_status "Project setup completed!"
     print_status ""
+    print_status "⚠️  IMPORTANT: You are currently in the 'base' conda environment."
+    print_status "   The dependencies were installed in the 'vibes' environment."
+    print_status ""
     print_status "Next steps:"
-    print_status "1. Activate conda environment: conda activate vibes"
+    print_status "1. Activate the vibes environment: conda activate vibes"
     print_status "2. Start development:"
     print_status "   - Demo mode: ./run_demo.sh"
     print_status "   - Full mode: ./run_vibe_test.sh"
     print_status ""
-    print_status "Note: The conda environment needs to be activated in each new terminal session."
+    print_status "Note: You must activate 'conda activate vibes' in each new terminal session."
     print_status "You are now in the project directory: $(pwd)"
 }
 
