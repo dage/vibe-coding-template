@@ -46,6 +46,7 @@ The project has been successfully cleaned up and now has:
 3. **Incremental Changes** - Make small, testable changes and verify functionality after each change
 4. **Focus on Core Functionality** - The main goal is AI-assisted coding workflows, not complex visualizations
 5. **Always Activate Conda Environment** - Before running any Python scripts, ensure the "vibes" conda environment is activated: `conda activate vibes`
+6. **No Automatic Commits** - Never automatically commit changes. Always let the user review and commit manually
 
 ### File Structure to Maintain
 
@@ -87,6 +88,7 @@ vibe_coding_template/
 3. **Test immediately** - Test functionality after each change
 4. **Document changes** - Update README.md and other documentation
 5. **Keep it simple** - If a change makes things more complex, reconsider it
+6. **Let user review** - Never commit automatically. Always let the user review changes first
 
 ### Emergency Recovery
 
