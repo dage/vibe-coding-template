@@ -41,20 +41,6 @@ check_prerequisites() {
         exit 1
     fi
     
-    if ! command_exists gh; then
-        print_error "GitHub CLI (gh) is not installed. Please install it first:"
-        print_error "  brew install gh"
-        print_error "  gh auth login"
-        exit 1
-    fi
-    
-    # Check if user is authenticated with GitHub CLI
-    if ! gh auth status >/dev/null 2>&1; then
-        print_error "GitHub CLI is not authenticated. Please run:"
-        print_error "  gh auth login"
-        exit 1
-    fi
-    
     if ! command_exists conda; then
         print_warning "Conda is not installed. You may need to install it for the vibe environment."
     fi
@@ -108,27 +94,13 @@ setup_project() {
     # Remove the original git history and initialize new repo
     print_status "Initializing new git repository..."
     rm -rf .git
-    git init
+    git init -b main
     git add .
     git commit -m "Initial commit from vibe-coding-template"
     
-    # Ask user if they want to create GitHub repository
-    print_status "Do you want to create a GitHub repository? (y/N):"
-    read -r CREATE_GITHUB
-    
-    if [[ "$CREATE_GITHUB" =~ ^[Yy]$ ]]; then
-        print_status "Creating GitHub repository..."
-        if gh repo create "$PROJECT_NAME" --public --source=. --remote=origin --push; then
-            print_success "GitHub repository created successfully"
-        else
-            print_warning "Failed to create GitHub repository. You can create it manually later."
-            print_warning "Repository will remain local only."
-        fi
-    else
-        print_status "Skipping GitHub repository creation. Project will be local only."
-    fi
-    
-    print_success "Project setup completed"
+    print_success "Local project setup completed"
+    print_status "To create a GitHub repository later, run:"
+    print_status "  gh repo create $PROJECT_NAME --public --source=. --remote=origin --push"
 }
 
 # Setup environment
@@ -150,7 +122,19 @@ setup_environment() {
     if command_exists conda; then
         if conda env list | grep -q "vibes"; then
             print_status "Activating vibes conda environment..."
-            conda activate vibes
+            # Try different conda activation methods
+            if [[ -f "$(conda info --base)/etc/profile.d/conda.sh" ]]; then
+                source "$(conda info --base)/etc/profile.d/conda.sh"
+                conda activate vibes
+            elif [[ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]]; then
+                source "$HOME/anaconda3/etc/profile.d/conda.sh"
+                conda activate vibes
+            elif [[ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]]; then
+                source "$HOME/miniconda3/etc/profile.d/conda.sh"
+                conda activate vibes
+            else
+                print_warning "Could not activate conda environment automatically. Please run: conda activate vibes"
+            fi
         else
             print_warning "Conda environment 'vibes' not found. You may need to create it manually"
         fi
@@ -193,6 +177,7 @@ main() {
     print_status "1. Edit .env and add your DeepInfra API key"
     print_status "2. Activate conda environment: conda activate vibes"
     print_status "3. Start coding with: python playloop.py"
+    print_status "4. To create GitHub repo: gh repo create $PROJECT_NAME --public --source=. --remote=origin --push"
 }
 
 # Run main function

@@ -12,23 +12,23 @@ Vite is a modern build tool and development server that provides:
 
 ## Quick Start
 
-### Option 1: Fast Local Development (Recommended for Testing)
+### Quick Start
 
-Use the local-only script for quick iteration without GitHub pollution:
+Use the project creation script:
 
 ```bash
 # Clone this template first
 git clone https://github.com/dage/vibe-coding-template.git
 cd vibe-coding-template
 
-# Run the fast local project creator
-./create_local_vibe_project.sh
+# Run the project creator
+./create_vibe_project.sh
 ```
 
 The script will:
 - Ask for a project name (pre-filled with "vibe-")
 - Clone the template to a new directory
-- Set up local git repository (no GitHub)
+- Set up local git repository
 - Set up the environment
 - Start the development workflow
 
@@ -36,23 +36,10 @@ The script will:
 - Git installed
 - Conda (optional but recommended)
 
-### Option 2: Full GitHub Integration
-
-Use the full script if you want GitHub repository creation:
-
+**To create a GitHub repository later:**
 ```bash
-# Clone this template first
-git clone https://github.com/dage/vibe-coding-template.git
-cd vibe-coding-template
-
-# Run the full project creator
-./create_vibe_project.sh
+gh repo create your-project-name --public --source=. --remote=origin --push
 ```
-
-**Prerequisites:**
-- Git installed
-- GitHub CLI (`gh`) installed and authenticated: `brew install gh && gh auth login`
-- Conda (optional but recommended)
 
 ### Option 2: Manual Setup
 
@@ -135,8 +122,7 @@ npm run dev
 - `test_setup.py` - Environment testing script
 
 ### Scripts
-- `create_local_vibe_project.sh` - **NEW**: Fast local-only project creation (recommended for testing)
-- `create_vibe_project.sh` - Full project creation with GitHub integration
+- `create_vibe_project.sh` - Project creation helper (creates local repo, GitHub optional)
 - `run_demo.sh` - Demo runner script
 - `run_vibe_test.sh` - Full vibe loop runner
 - `setup_env.sh` - Environment activation helper
@@ -154,12 +140,12 @@ npm run dev
 ## Tips
 
 - **Start with the demo**: Run `./run_demo.sh` to see how the system works without API calls
-- **Use local-only for testing**: `./create_local_vibe_project.sh` for fast iteration without GitHub pollution
+- **Use the helper script**: `./create_vibe_project.sh` for quick project setup
 - **Check the history**: Read `PROJECT_HISTORY_LESSONS.md` to understand what not to do
 - **Template approach**: Clone this template for each new project to avoid git history pollution
 - **Environment setup**: Always activate the conda environment before running: `conda activate vibes`
 - **API key management**: Keep your `.env` file gitignored and secure
-- **Fast iteration**: Use local-only projects for testing, create GitHub repos only when ready
+- **Fast iteration**: Create local projects first, push to GitHub only when ready
 
 ## Troubleshooting
 
