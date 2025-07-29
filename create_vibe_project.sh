@@ -107,15 +107,17 @@ setup_project() {
 setup_environment() {
     print_status "Setting up environment..."
     
-    # Check if .env exists, if not create from template
-    if [[ ! -f ".env" ]]; then
-        if [[ -f "env_template.txt" ]]; then
-            print_status "Creating .env from template..."
-            cp env_template.txt .env
-            print_warning "Please edit .env and add your DeepInfra API key"
-        else
-            print_warning "No env_template.txt found. You may need to create .env manually"
-        fi
+    # Check if .env exists in the template directory and copy it
+    if [[ -f "../.env" ]]; then
+        print_status "Copying .env from template directory..."
+        cp ../.env .env
+        print_success "API key copied from template"
+    elif [[ -f "env_template.txt" ]]; then
+        print_status "Creating .env from template..."
+        cp env_template.txt .env
+        print_warning "Please edit .env and add your DeepInfra API key"
+    else
+        print_warning "No .env or env_template.txt found. You may need to create .env manually"
     fi
     
     # Check if conda environment exists
@@ -174,10 +176,9 @@ main() {
     
     print_success "Project '$PROJECT_NAME' created successfully!"
     print_status "Next steps:"
-    print_status "1. Edit .env and add your DeepInfra API key"
-    print_status "2. Activate conda environment: conda activate vibes"
-    print_status "3. Start coding with: python playloop.py"
-    print_status "4. To create GitHub repo: gh repo create $PROJECT_NAME --public --source=. --remote=origin --push"
+    print_status "1. Activate conda environment: conda activate vibes"
+    print_status "2. Start coding with: python playloop.py"
+    print_status "3. To create GitHub repo: gh repo create $PROJECT_NAME --public --source=. --remote=origin --push"
 }
 
 # Run main function

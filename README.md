@@ -25,6 +25,14 @@ The script will:
 **Prerequisites:**
 - Git installed
 - Conda (optional but recommended)
+- DeepInfra API key (get one at [https://deepinfra.com/](https://deepinfra.com/))
+
+**Setup API Key (One-time):**
+```bash
+# Edit the template's .env file with your API key
+cp env_template.txt .env
+# Edit .env and add your DeepInfra API key
+```
 
 **To create a GitHub repository later:**
 ```bash
@@ -47,7 +55,7 @@ cd your-repo-name
 
 # Set up environment
 cp env_template.txt .env
-# Edit .env with your API key
+# Edit .env with your DeepInfra API key
 
 # Activate conda environment
 conda activate vibes
@@ -55,6 +63,11 @@ conda activate vibes
 # Start development
 python playloop.py
 ```
+
+**Prerequisites:**
+- Git installed
+- Conda (optional but recommended)
+- DeepInfra API key (get one at [https://deepinfra.com/](https://deepinfra.com/))
 
 #### Demo Mode (No API Key Required)
 ```bash
