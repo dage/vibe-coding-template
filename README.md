@@ -1,6 +1,6 @@
 # Vibe Coding Template - AI-Powered Development Workflow
 
-This project provides a clean, working template for AI-assisted coding workflows using Aider, DeepInfra's open-source vision and code models, and Playwright for screenshot analysis. The template is designed to be cost-efficient by using open-source models at DeepInfra instead of traditional frontier models, and offers ease of setup by staying within the DeepInfra ecosystem, allowing you to use the same credits pool for all models - both code generation and vision analysis.
+This project provides a clean, working template for AI-assisted coding workflows using Aider, DeepInfra's open-source vision and code models, and Playwright for screenshot analysis. The template is designed to be cost-efficient by using open-source models at DeepInfra instead of traditional frontier models, and offers ease of setup and management by staying within the DeepInfra ecosystem, allowing you to use the same credits pool for all models - both code generation and vision analysis.
 
 ## Quick Start
 
@@ -33,8 +33,16 @@ The script will:
 - Clone the template to a new directory
 - Set up local git repository
 - Copy your API key automatically
-- Set up the environment
+- Set up the environment (activates conda 'vibes' if available)
 - Start the development workflow
+
+**Note**: The script will try to activate a conda environment named 'vibes' if it exists. If you don't have this environment, you can create it with:
+```bash
+conda create -n vibes python=3.9
+conda activate vibes
+pip install -r requirements.txt
+playwright install
+```
 
 **To create a GitHub repository later:**
 ```bash
@@ -59,8 +67,11 @@ cd your-repo-name
 cp env_template.txt .env
 # Edit .env with your DeepInfra API key
 
-# Activate conda environment
-conda activate vibes
+# Install dependencies
+pip install -r requirements.txt
+
+# Install Playwright browsers
+playwright install
 
 # Start development
 python playloop.py

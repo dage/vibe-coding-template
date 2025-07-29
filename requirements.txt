@@ -1,0 +1,13 @@
+# Vibe Coding Template Dependencies
+
+# OpenAI client for DeepInfra API
+openai>=1.0.0
+
+# Playwright for browser automation and screenshots
+playwright>=1.40.0
+
+# Environment variable management
+python-dotenv>=1.0.0
+
+# Async support (included with Python 3.7+)
+# asyncio, json, time, os, pathlib are built-in 
