@@ -172,6 +172,10 @@ setup_environment() {
 provide_next_steps() {
     print_status "Project setup completed!"
     print_status ""
+    print_status "Changing to project directory..."
+    cd "$PROJECT_NAME"
+    print_status "You are now in the project directory: $(pwd)"
+    print_status ""
     print_status "Next steps:"
     print_status "1. Activate the vibes environment: conda activate vibes"
     print_status "2. Start development:"
@@ -179,7 +183,6 @@ provide_next_steps() {
     print_status "   - Full mode: ./run_vibe_test.sh"
     print_status ""
     print_status "Note: You must activate 'conda activate vibes' in each new terminal session."
-    print_status "You are now in the project directory: $(pwd)"
 }
 
 # Main execution
@@ -196,6 +199,8 @@ main() {
     print_success "Project '$PROJECT_NAME' created successfully!"
     print_status "To create GitHub repo later:"
     print_status "  gh repo create $PROJECT_NAME --public --source=. --remote=origin --push"
+    print_status ""
+    print_status "You are now ready to start development in your new project!"
 }
 
 # Run main function
