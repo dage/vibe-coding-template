@@ -131,13 +131,8 @@ setup_environment() {
     # Install dependencies in conda environment
     print_status "Installing dependencies..."
     if command_exists conda && conda env list | grep -q "vibes"; then
-        print_status "Activating vibes environment for dependency installation..."
-        # Source conda if needed
-        if [[ -f "$(conda info --base)/etc/profile.d/conda.sh" ]]; then
-            source "$(conda info --base)/etc/profile.d/conda.sh"
-        fi
-        conda activate vibes
-        pip install -r requirements.txt
+        print_status "Installing dependencies in vibes environment..."
+        conda run -n vibes pip install -r requirements.txt
         print_success "Dependencies installed in vibes environment"
     elif command_exists pip; then
         print_warning "Installing in current environment (not vibes)"
@@ -150,17 +145,8 @@ setup_environment() {
     # Install Playwright browsers in conda environment
     print_status "Installing Playwright browsers..."
     if command_exists conda && conda env list | grep -q "vibes"; then
-        # Ensure we're in the vibes environment
-        if [[ -f "$(conda info --base)/etc/profile.d/conda.sh" ]]; then
-            source "$(conda info --base)/etc/profile.d/conda.sh"
-        fi
-        conda activate vibes
-        if command_exists playwright; then
-            playwright install
-            print_success "Playwright browsers installed in vibes environment"
-        else
-            print_warning "playwright not found. Please install manually: playwright install"
-        fi
+        conda run -n vibes playwright install
+        print_success "Playwright browsers installed in vibes environment"
     elif command_exists playwright; then
         playwright install
         print_success "Playwright browsers installed"
@@ -185,9 +171,6 @@ setup_environment() {
 # Provide next steps and change to project directory
 provide_next_steps() {
     print_status "Project setup completed!"
-    print_status ""
-    print_status "⚠️  IMPORTANT: You are currently in the 'base' conda environment."
-    print_status "   The dependencies were installed in the 'vibes' environment."
     print_status ""
     print_status "Next steps:"
     print_status "1. Activate the vibes environment: conda activate vibes"
