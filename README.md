@@ -1,6 +1,6 @@
-# Vibe Mandelbrot - AI-Powered Coding with DeepInfra
+# Vibe Coding Template - AI-Powered Development Workflow
 
-This project sets up an automated coding environment using Aider, DeepInfra's vision and code models, and Playwright for screenshot analysis.
+This project provides a clean, working template for AI-assisted coding workflows using Aider, DeepInfra's vision and code models, and Playwright for screenshot analysis. The template is designed to enable autonomous iteration loops with minimal human intervention.
 
 ## What is Vite?
 
@@ -10,9 +10,36 @@ Vite is a modern build tool and development server that provides:
 - **Rich features** including TypeScript, JSX, and CSS support
 - **Optimized builds** for production
 
-## Setup Instructions
+## Quick Start
 
-### 1. Environment Setup
+### Option 1: Automated Project Creation (Recommended)
+
+Use the helper script to create a new project from this template:
+
+```bash
+# Clone this template first
+git clone https://github.com/dage/vibe-coding-template.git
+cd vibe-coding-template
+
+# Run the automated project creator
+./create_vibe_project.sh
+```
+
+The script will:
+- Ask for a project name (pre-filled with "vibe-")
+- Clone the template to a new directory
+- Create a new GitHub repository
+- Set up the environment
+- Start the development workflow
+
+**Prerequisites:**
+- Git installed
+- GitHub CLI (`gh`) installed and authenticated: `brew install gh && gh auth login`
+- Conda (optional but recommended)
+
+### Option 2: Manual Setup
+
+#### 1. Environment Setup
 
 1. Copy the environment template:
    ```bash
@@ -25,7 +52,7 @@ Vite is a modern build tool and development server that provides:
    OPENAI_API_KEY=your_actual_api_key_here
    ```
 
-### 2. Activate Environment
+#### 2. Activate Environment
 
 ```bash
 # Activate the vibes conda environment
@@ -35,7 +62,7 @@ conda activate vibes
 ./setup_env.sh
 ```
 
-### 3. Create a Web App (Optional)
+#### 3. Create a Web App (Optional)
 
 If you don't have a web app yet, you can create a simple Vite app:
 
@@ -47,7 +74,7 @@ npm install
 npm run dev
 ```
 
-### 4. Run the Vibe Coding Loop
+#### 4. Run the Vibe Coding Loop
 
 #### Demo Mode (No API Key Required)
 ```bash
@@ -82,24 +109,38 @@ npm run dev
 - **Code**: `Qwen/Qwen3-Coder-480B-A35B-Instruct-Turbo` - Generates code changes
 - **Alternative**: `moonshotai/Kimi-K2-Instruct` - Text-only code generation
 
-## Files
+## Project Structure
 
-- `playloop.py` - Main automation script
+### Core Files
+- `playloop.py` - Main AI automation script
 - `demo_vibe_loop.py` - Demo version (no API required)
+- `create_initial_app.py` - Creates initial Vite app structure
+- `test_setup.py` - Environment testing script
+
+### Scripts
+- `create_vibe_project.sh` - **NEW**: Automated project creation helper
 - `run_demo.sh` - Demo runner script
 - `run_vibe_test.sh` - Full vibe loop runner
 - `setup_env.sh` - Environment activation helper
 - `setup_deepinfra.sh` - DeepInfra API setup (alternative)
+
+### Configuration
 - `env_template.txt` - Environment variables template
-- `test_setup.py` - Environment testing script
-- `ai_loop_artifacts/` - Generated screenshots and analysis files
+- `.cursorrules` - **NEW**: Cursor IDE rules with project history lessons
+- `PROJECT_HISTORY_LESSONS.md` - **NEW**: Complete project development history
+
+### Application
+- `test-app/` - Working Vite application (included in template)
+- `ai_loop_artifacts/` - Generated screenshots and analysis files (gitignored)
 
 ## Tips
 
-- Start with manual runs before setting up automatic loops
-- The system captures full-page screenshots and console logs
-- Changes are applied with automatic testing and linting
-- You can switch between Qwen3-Coder and Kimi K2 models easily
+- **Start with the demo**: Run `./run_demo.sh` to see how the system works without API calls
+- **Use the helper script**: `./create_vibe_project.sh` for quick project setup
+- **Check the history**: Read `PROJECT_HISTORY_LESSONS.md` to understand what not to do
+- **Template approach**: Clone this template for each new project to avoid git history pollution
+- **Environment setup**: Always activate the conda environment before running: `conda activate vibes`
+- **API key management**: Keep your `.env` file gitignored and secure
 
 ## Troubleshooting
 
@@ -112,7 +153,25 @@ npm run dev
 - Ensure your dev server is running on the expected port (default: 5173)
 - Check that all dependencies are installed: `python test_setup.py`
 
+### GitHub CLI Issues
+- Install GitHub CLI: `brew install gh`
+- Authenticate: `gh auth login`
+- Check status: `gh auth status`
+
 ### Debugging
 - Check the `ai_loop_artifacts/` directory for screenshots and analysis files
 - Run `python test_setup.py` to verify your environment
-- Use the demo mode to test the workflow without API calls 
+- Use the demo mode to test the workflow without API calls
+- Check `.cursorrules` for project-specific guidance
+
+## Project History & Lessons Learned
+
+This template has evolved through significant development iterations. To avoid repeating past mistakes:
+
+- **Read `PROJECT_HISTORY_LESSONS.md`** - Complete development history with detailed analysis
+- **Check `.cursorrules`** - Concise guidelines for AI agents working on this project
+- **Key lesson**: Never isolate the test-app from git tracking
+- **Key lesson**: Avoid over-engineering workflows
+- **Key lesson**: Keep the template simple and focused
+
+The current state represents a clean, working template that avoids the complexity and issues of previous iterations. 
