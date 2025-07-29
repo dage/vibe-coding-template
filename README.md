@@ -117,7 +117,6 @@ python playloop.py
 ### Core Files
 - `playloop.py` - Main AI automation script
 - `demo_vibe_loop.py` - Demo version (no API required)
-- `create_initial_app.py` - Creates initial Vite app structure
 - `test_setup.py` - Environment testing script
 
 ### Scripts

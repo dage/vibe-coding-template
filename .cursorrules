@@ -67,7 +67,7 @@ vibe_coding_template/
 ### Testing Requirements
 
 1. **Always test the AI loop** - Verify that `playloop.py` works correctly
-2. **Test app creation** - Ensure `create_initial_app.py` can create working apps
+2. **Test app creation** - Ensure the test-app is working and properly structured
 3. **Test environment setup** - Verify all setup scripts work
 4. **Test the demo** - Ensure `demo_vibe_loop.py` runs successfully
 
