@@ -63,6 +63,9 @@ gh repo create your-project-name --public --source=. --remote=origin --push
 git clone https://github.com/your-username/your-repo-name.git
 cd your-repo-name
 
+# Set execute permissions for scripts
+chmod +x *.py *.sh
+
 # Set up environment
 cp env_template.txt .env
 # Edit .env with your DeepInfra API key
@@ -166,6 +169,10 @@ python playloop.py
 - Run `python test_setup.py` to verify your environment
 - Use the demo mode to test the workflow without API calls
 - Check `.cursorrules` for project-specific guidance
+
+### Permission Issues
+- If you get "permission denied" errors, run: `chmod +x *.py *.sh`
+- This is automatically handled by the `create_vibe_project.sh` script
 
 ## Project History & Lessons Learned
 

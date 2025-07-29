@@ -107,6 +107,11 @@ setup_project() {
 setup_environment() {
     print_status "Setting up environment..."
     
+    # Set execute permissions for scripts
+    print_status "Setting execute permissions..."
+    chmod +x *.py *.sh 2>/dev/null || true
+    print_success "Execute permissions set"
+    
     # Check if .env exists in the template directory and copy it
     if [[ -f "../.env" ]]; then
         print_status "Copying .env from template directory..."
