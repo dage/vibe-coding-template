@@ -28,13 +28,7 @@ cp env_template.txt .env
 ./create_vibe_project.sh
 ```
 
-The script will:
-- Ask for a project name (pre-filled with "vibe-")
-- Clone the template to a new directory
-- Set up local git repository
-- Copy your API key automatically
-- Set up the environment (activates conda 'vibes' if available)
-- Start the development workflow
+The script will create a new project from the template with all dependencies installed and ready to use.
 
 **Note**: The script will try to activate a conda environment named 'vibes' if it exists. If you don't have this environment, you can create it with:
 ```bash

@@ -59,8 +59,11 @@ get_project_name() {
         PROJECT_NAME="vibe-$PROJECT_NAME"
     fi
     
-    # Remove any leading/trailing whitespace
-    PROJECT_NAME=$(echo "$PROJECT_NAME" | xargs)
+    # Clean project name: lowercase, replace spaces/periods with dashes
+    PROJECT_NAME=$(echo "$PROJECT_NAME" | tr '[:upper:]' '[:lower:]' | tr ' .' '-')
+    
+    # Remove any leading/trailing whitespace and dashes
+    PROJECT_NAME=$(echo "$PROJECT_NAME" | xargs | sed 's/^-\+//' | sed 's/-\+$//')
     
     # Validate project name
     if [[ -z "$PROJECT_NAME" ]]; then
@@ -125,47 +128,39 @@ setup_environment() {
         print_warning "No .env or env_template.txt found. You may need to create .env manually"
     fi
     
-    # Check if conda environment exists and activate it
-    if command_exists conda; then
-        if conda env list | grep -q "vibes"; then
-            print_status "Activating vibes conda environment..."
-            # Try different conda activation methods
-            if [[ -f "$(conda info --base)/etc/profile.d/conda.sh" ]]; then
-                source "$(conda info --base)/etc/profile.d/conda.sh"
-                conda activate vibes
-                print_success "Conda environment activated"
-            elif [[ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]]; then
-                source "$HOME/anaconda3/etc/profile.d/conda.sh"
-                conda activate vibes
-                print_success "Conda environment activated"
-            elif [[ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]]; then
-                source "$HOME/miniconda3/etc/profile.d/conda.sh"
-                conda activate vibes
-                print_success "Conda environment activated"
-            else
-                print_warning "Could not activate conda environment automatically. Please run: conda activate vibes"
-            fi
-        else
-            print_warning "Conda environment 'vibes' not found. You may need to create it manually"
-        fi
+    # Install dependencies
+    print_status "Installing dependencies..."
+    if command_exists pip; then
+        pip install -r requirements.txt
+        print_success "Dependencies installed"
+    else
+        print_warning "pip not found. Please install dependencies manually: pip install -r requirements.txt"
+    fi
+    
+    # Install Playwright browsers
+    print_status "Installing Playwright browsers..."
+    if command_exists playwright; then
+        playwright install
+        print_success "Playwright browsers installed"
+    else
+        print_warning "playwright not found. Please install manually: playwright install"
     fi
     
     print_success "Environment setup completed"
 }
 
-# Provide next steps instead of running start script
+# Provide next steps and change to project directory
 provide_next_steps() {
     print_status "Project setup completed!"
     print_status ""
     print_status "Next steps:"
     print_status "1. Activate conda environment: conda activate vibes"
-    print_status "2. Install dependencies: pip install -r requirements.txt"
-    print_status "3. Install Playwright: playwright install"
-    print_status "4. Start development:"
+    print_status "2. Start development:"
     print_status "   - Demo mode: ./run_demo.sh"
     print_status "   - Full mode: ./run_vibe_test.sh"
     print_status ""
     print_status "Note: The conda environment needs to be activated in each new terminal session."
+    print_status "You are now in the project directory: $(pwd)"
 }
 
 # Main execution

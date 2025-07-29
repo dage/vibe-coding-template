@@ -3,15 +3,37 @@
 
 echo "🚀 Starting Vibe Coding Test..."
 
-# Activate conda environment
+# Activate conda environment (if available)
 echo "🔧 Activating vibes environment..."
-conda activate vibes
+if command -v conda >/dev/null 2>&1; then
+    # Try to activate conda environment
+    if conda env list | grep -q "vibes"; then
+        # Source conda if needed
+        if [[ -f "$(conda info --base)/etc/profile.d/conda.sh" ]]; then
+            source "$(conda info --base)/etc/profile.d/conda.sh"
+        fi
+        conda activate vibes 2>/dev/null || echo "⚠️  Could not activate conda environment automatically"
+    else
+        echo "⚠️  Conda environment 'vibes' not found"
+    fi
+else
+    echo "⚠️  Conda not found, continuing without conda environment"
+fi
 
 # Check if test app exists
 if [ ! -d "test-app" ]; then
     echo "❌ test-app directory not found!"
     exit 1
 fi
+
+# Check if test-app dependencies are installed
+echo "🔍 Checking test-app dependencies..."
+cd test-app
+if [[ ! -d "node_modules" ]]; then
+    echo "📦 Installing test-app dependencies..."
+    npm install
+fi
+cd ..
 
 # Start the test app in the background
 echo "🌐 Starting test app..."

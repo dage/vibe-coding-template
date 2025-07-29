@@ -3,9 +3,22 @@
 
 echo "🚀 Starting Vibe Coding Demo..."
 
-# Activate conda environment
+# Activate conda environment (if available)
 echo "🔧 Activating vibes environment..."
-conda activate vibes
+if command -v conda >/dev/null 2>&1; then
+    # Try to activate conda environment
+    if conda env list | grep -q "vibes"; then
+        # Source conda if needed
+        if [[ -f "$(conda info --base)/etc/profile.d/conda.sh" ]]; then
+            source "$(conda info --base)/etc/profile.d/conda.sh"
+        fi
+        conda activate vibes 2>/dev/null || echo "⚠️  Could not activate conda environment automatically"
+    else
+        echo "⚠️  Conda environment 'vibes' not found"
+    fi
+else
+    echo "⚠️  Conda not found, continuing without conda environment"
+fi
 
 echo ""
 echo "🎯 Running demo vibe coding loop..."
