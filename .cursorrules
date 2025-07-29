@@ -42,6 +42,7 @@ The project currently has:
 2. **Version Control Everything** - Never remove files from git tracking without clear justification
 3. **Incremental Changes** - Make small, testable changes and verify functionality after each change
 4. **Focus on Core Functionality** - The main goal is AI-assisted coding workflows, not complex visualizations
+5. **Always Activate Conda Environment** - Before running any Python scripts, ensure the "vibes" conda environment is activated: `conda activate vibes`
 
 ### File Structure to Maintain
 
@@ -70,6 +71,7 @@ vibe_coding_template/
 2. **Test app creation** - Ensure the test-app is working and properly structured
 3. **Test environment setup** - Verify all setup scripts work
 4. **Test the demo** - Ensure `demo_vibe_loop.py` runs successfully
+5. **Always activate conda environment** - Run `conda activate vibes` before testing any Python scripts
 
 ### When Making Changes
 
