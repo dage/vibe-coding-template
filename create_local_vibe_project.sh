@@ -1,5 +1,5 @@
 #!/bin/bash
-# create_vibe_project.sh - Helper script to create new vibe projects from template
+# create_local_vibe_project.sh - Fast local-only vibe project creation
 
 set -e  # Exit on any error
 
@@ -41,20 +41,6 @@ check_prerequisites() {
         exit 1
     fi
     
-    if ! command_exists gh; then
-        print_error "GitHub CLI (gh) is not installed. Please install it first:"
-        print_error "  brew install gh"
-        print_error "  gh auth login"
-        exit 1
-    fi
-    
-    # Check if user is authenticated with GitHub CLI
-    if ! gh auth status >/dev/null 2>&1; then
-        print_error "GitHub CLI is not authenticated. Please run:"
-        print_error "  gh auth login"
-        exit 1
-    fi
-    
     if ! command_exists conda; then
         print_warning "Conda is not installed. You may need to install it for the vibe environment."
     fi
@@ -91,9 +77,9 @@ get_project_name() {
     print_success "Project name: $PROJECT_NAME"
 }
 
-# Clone template and setup repository
+# Clone template and setup local repository
 setup_project() {
-    print_status "Setting up project..."
+    print_status "Setting up local project..."
     
     # Go up one directory
     cd ..
@@ -106,29 +92,13 @@ setup_project() {
     cd "$PROJECT_NAME"
     
     # Remove the original git history and initialize new repo
-    print_status "Initializing new git repository..."
+    print_status "Initializing local git repository..."
     rm -rf .git
     git init
     git add .
     git commit -m "Initial commit from vibe-coding-template"
     
-    # Ask user if they want to create GitHub repository
-    print_status "Do you want to create a GitHub repository? (y/N):"
-    read -r CREATE_GITHUB
-    
-    if [[ "$CREATE_GITHUB" =~ ^[Yy]$ ]]; then
-        print_status "Creating GitHub repository..."
-        if gh repo create "$PROJECT_NAME" --public --source=. --remote=origin --push; then
-            print_success "GitHub repository created successfully"
-        else
-            print_warning "Failed to create GitHub repository. You can create it manually later."
-            print_warning "Repository will remain local only."
-        fi
-    else
-        print_status "Skipping GitHub repository creation. Project will be local only."
-    fi
-    
-    print_success "Project setup completed"
+    print_success "Local project setup completed"
 }
 
 # Setup environment
@@ -179,8 +149,11 @@ run_start_script() {
 
 # Main execution
 main() {
-    echo "🚀 Vibe Project Creator"
-    echo "========================"
+    echo "🚀 Local Vibe Project Creator (Fast Mode)"
+    echo "=========================================="
+    echo "This creates a local-only project for fast iteration"
+    echo "No GitHub repository will be created"
+    echo ""
     
     check_prerequisites
     get_project_name
@@ -188,11 +161,12 @@ main() {
     setup_environment
     run_start_script
     
-    print_success "Project '$PROJECT_NAME' created successfully!"
+    print_success "Local project '$PROJECT_NAME' created successfully!"
     print_status "Next steps:"
     print_status "1. Edit .env and add your DeepInfra API key"
     print_status "2. Activate conda environment: conda activate vibes"
     print_status "3. Start coding with: python playloop.py"
+    print_status "4. When ready, you can create a GitHub repo manually"
 }
 
 # Run main function

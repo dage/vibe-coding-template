@@ -12,25 +12,42 @@ Vite is a modern build tool and development server that provides:
 
 ## Quick Start
 
-### Option 1: Automated Project Creation (Recommended)
+### Option 1: Fast Local Development (Recommended for Testing)
 
-Use the helper script to create a new project from this template:
+Use the local-only script for quick iteration without GitHub pollution:
 
 ```bash
 # Clone this template first
 git clone https://github.com/dage/vibe-coding-template.git
 cd vibe-coding-template
 
-# Run the automated project creator
-./create_vibe_project.sh
+# Run the fast local project creator
+./create_local_vibe_project.sh
 ```
 
 The script will:
 - Ask for a project name (pre-filled with "vibe-")
 - Clone the template to a new directory
-- Create a new GitHub repository
+- Set up local git repository (no GitHub)
 - Set up the environment
 - Start the development workflow
+
+**Prerequisites:**
+- Git installed
+- Conda (optional but recommended)
+
+### Option 2: Full GitHub Integration
+
+Use the full script if you want GitHub repository creation:
+
+```bash
+# Clone this template first
+git clone https://github.com/dage/vibe-coding-template.git
+cd vibe-coding-template
+
+# Run the full project creator
+./create_vibe_project.sh
+```
 
 **Prerequisites:**
 - Git installed
@@ -118,7 +135,8 @@ npm run dev
 - `test_setup.py` - Environment testing script
 
 ### Scripts
-- `create_vibe_project.sh` - **NEW**: Automated project creation helper
+- `create_local_vibe_project.sh` - **NEW**: Fast local-only project creation (recommended for testing)
+- `create_vibe_project.sh` - Full project creation with GitHub integration
 - `run_demo.sh` - Demo runner script
 - `run_vibe_test.sh` - Full vibe loop runner
 - `setup_env.sh` - Environment activation helper
@@ -136,11 +154,12 @@ npm run dev
 ## Tips
 
 - **Start with the demo**: Run `./run_demo.sh` to see how the system works without API calls
-- **Use the helper script**: `./create_vibe_project.sh` for quick project setup
+- **Use local-only for testing**: `./create_local_vibe_project.sh` for fast iteration without GitHub pollution
 - **Check the history**: Read `PROJECT_HISTORY_LESSONS.md` to understand what not to do
 - **Template approach**: Clone this template for each new project to avoid git history pollution
 - **Environment setup**: Always activate the conda environment before running: `conda activate vibes`
 - **API key management**: Keep your `.env` file gitignored and secure
+- **Fast iteration**: Use local-only projects for testing, create GitHub repos only when ready
 
 ## Troubleshooting
 
