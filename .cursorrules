@@ -25,14 +25,17 @@ The last known working state was around commit `6f170e40a4d8cf1e4bd2d422d3ecd24e
 - Clear documentation
 - Test-app properly under version control
 
-### Current State Issues
+### Current State (Updated - July 29, 2025)
 
-The project currently has:
-- Test-app isolated from git tracking (major problem)
-- Over-complicated workflow scripts
-- Complex git isolation mechanisms
-- Inconsistent Aider integration
-- Multiple documentation files that may be outdated
+The project has been successfully cleaned up and now has:
+- ✅ Clean, simple template structure
+- ✅ Working test-app with Vite (properly tracked in git)
+- ✅ Simplified workflow scripts
+- ✅ Proper conda environment handling with `conda run`
+- ✅ Project name sanitization (lowercase, underscores)
+- ✅ Automatic dependency installation in vibes environment
+- ✅ Clear documentation and setup instructions
+- ✅ Removed over-engineered components (setup_deepinfra.sh, complex workflows)
 
 ## Development Guidelines
 
@@ -51,10 +54,14 @@ vibe_coding_template/
 ├── playloop.py (core AI loop - keep simple)
 ├── demo_vibe_loop.py (demo functionality)
 ├── test_setup.py (environment testing)
+├── create_vibe_project.sh (project creation helper)
 ├── test-app/ (simple Vite app - MUST stay in git)
-├── setup_*.sh (environment setup)
-├── run_*.sh (execution scripts)
+├── setup_env.sh (environment activation)
+├── run_demo.sh (demo runner)
+├── run_vibe_test.sh (full vibe loop runner)
 ├── requirements.txt (Python dependencies)
+├── .cursorrules (AI agent guidelines)
+├── PROJECT_HISTORY_LESSONS.md (development history)
 └── README.md (documentation)
 ```
 
