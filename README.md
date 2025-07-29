@@ -125,7 +125,7 @@ python playloop.py
 
 ### Configuration
 - `env_template.txt` - Environment variables template
-- `.cursorrules` - Cursor IDE rules with project history lessons
+- `.cursorrules` - Cursor IDE rules with project history lessons. Remember to put into the AI agents' context in your IDE, rename if not using Cursor.
 - `PROJECT_HISTORY_LESSONS.md` - Complete project development history
 
 ### Application
