@@ -10,7 +10,7 @@ playwright>=1.40.0
 python-dotenv>=1.0.0
 
 # Aider for AI-assisted code editing
-aider>=0.30.0
+aider>=0.2.6
 
 # Async support (included with Python 3.7+)
 # asyncio, json, time, os, pathlib are built-in 
