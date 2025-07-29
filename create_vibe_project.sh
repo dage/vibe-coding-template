@@ -59,11 +59,11 @@ get_project_name() {
         PROJECT_NAME="vibe-$PROJECT_NAME"
     fi
     
-    # Clean project name: lowercase, replace spaces/periods with dashes
-    PROJECT_NAME=$(echo "$PROJECT_NAME" | tr '[:upper:]' '[:lower:]' | tr ' .' '-')
+    # Clean project name: lowercase, replace spaces/periods with underscores
+    PROJECT_NAME=$(echo "$PROJECT_NAME" | tr '[:upper:]' '[:lower:]' | tr ' .' '_')
     
-    # Remove any leading/trailing whitespace and dashes
-    PROJECT_NAME=$(echo "$PROJECT_NAME" | xargs | sed 's/^-\+//' | sed 's/-\+$//')
+    # Remove any leading/trailing whitespace and underscores
+    PROJECT_NAME=$(echo "$PROJECT_NAME" | xargs | sed 's/^_\+//' | sed 's/_\+$//')
     
     # Validate project name
     if [[ -z "$PROJECT_NAME" ]]; then
@@ -168,12 +168,10 @@ setup_environment() {
     print_success "Environment setup completed"
 }
 
-# Provide next steps and change to project directory
+# Provide next steps
 provide_next_steps() {
     print_status "Project setup completed!"
     print_status ""
-    print_status "Changing to project directory..."
-    cd "$PROJECT_NAME"
     print_status "You are now in the project directory: $(pwd)"
     print_status ""
     print_status "Next steps:"
