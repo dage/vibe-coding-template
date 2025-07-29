@@ -374,6 +374,7 @@ The project has been successfully restored to a clean, working state through sys
 - **Simplified workflow scripts** - Clear separation between demo and full modes
 - **Updated documentation** - Clear, accurate setup instructions
 - **Removed redundant files** - Eliminated `setup_deepinfra.sh` and other over-engineered components
+- **Directory name sanitization** - Converts dashes to underscores for directory names while preserving dashes for GitHub repo names
 
 #### ✅ **Current Working State:**
 - Clean template structure with essential files only

@@ -59,8 +59,11 @@ get_project_name() {
         PROJECT_NAME="vibe-$PROJECT_NAME"
     fi
     
-    # Clean project name: lowercase, replace spaces/periods with underscores
-    PROJECT_NAME=$(echo "$PROJECT_NAME" | tr '[:upper:]' '[:lower:]' | tr ' .' '_')
+    # Store original name for GitHub repo (keep dashes)
+    GITHUB_REPO_NAME="$PROJECT_NAME"
+    
+    # Clean project name: lowercase, replace spaces/periods/dashes with underscores
+    PROJECT_NAME=$(echo "$PROJECT_NAME" | tr '[:upper:]' '[:lower:]' | tr ' .-' '_')
     
     # Remove any leading/trailing whitespace and underscores
     PROJECT_NAME=$(echo "$PROJECT_NAME" | xargs | sed 's/^_\+//' | sed 's/_\+$//')
@@ -77,7 +80,7 @@ get_project_name() {
         exit 1
     fi
     
-    print_success "Project name: $PROJECT_NAME"
+    print_success "Project name: $PROJECT_NAME (GitHub repo: $GITHUB_REPO_NAME)"
 }
 
 # Clone template and setup repository
@@ -103,7 +106,7 @@ setup_project() {
     
     print_success "Local project setup completed"
     print_status "To create a GitHub repository later, run:"
-    print_status "  gh repo create $PROJECT_NAME --public --source=. --remote=origin --push"
+    print_status "  gh repo create $GITHUB_REPO_NAME --public --source=. --remote=origin --push"
 }
 
 # Setup environment
@@ -196,9 +199,14 @@ main() {
     
     print_success "Project '$PROJECT_NAME' created successfully!"
     print_status "To create GitHub repo later:"
-    print_status "  gh repo create $PROJECT_NAME --public --source=. --remote=origin --push"
+    print_status "  gh repo create $GITHUB_REPO_NAME --public --source=. --remote=origin --push"
     print_status ""
     print_status "You are now ready to start development in your new project!"
+    print_status ""
+    print_status "Next steps:"
+    print_status "1. Change to the project directory: cd ../$PROJECT_NAME"
+    print_status "2. Activate the vibes environment: conda activate vibes"
+    print_status "3. Start development: ./run_demo.sh or ./run_vibe_test.sh"
 }
 
 # Run main function

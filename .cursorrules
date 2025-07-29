@@ -32,7 +32,7 @@ The project has been successfully cleaned up and now has:
 - ✅ Working test-app with Vite (properly tracked in git)
 - ✅ Simplified workflow scripts
 - ✅ Proper conda environment handling with `conda run`
-- ✅ Project name sanitization (lowercase, underscores)
+- ✅ Project name sanitization (lowercase, underscores) - directory names use underscores, GitHub repos keep dashes
 - ✅ Automatic dependency installation in vibes environment
 - ✅ Clear documentation and setup instructions
 - ✅ Removed over-engineered components (setup_deepinfra.sh, complex workflows)
