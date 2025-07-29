@@ -146,6 +146,17 @@ setup_environment() {
         print_warning "playwright not found. Please install manually: playwright install"
     fi
     
+    # Install test-app dependencies
+    print_status "Installing test-app dependencies..."
+    if [[ -d "test-app" ]] && command_exists npm; then
+        cd test-app
+        npm install
+        cd ..
+        print_success "Test-app dependencies installed"
+    else
+        print_warning "test-app not found or npm not available"
+    fi
+    
     print_success "Environment setup completed"
 }
 
