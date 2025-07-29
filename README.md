@@ -2,19 +2,9 @@
 
 This project provides a clean, working template for AI-assisted coding workflows using Aider, DeepInfra's vision and code models, and Playwright for screenshot analysis. The template is designed to enable autonomous iteration loops with minimal human intervention.
 
-## What is Vite?
-
-Vite is a modern build tool and development server that provides:
-- **Lightning fast** development with instant hot module replacement
-- **Zero config** setup with sensible defaults
-- **Rich features** including TypeScript, JSX, and CSS support
-- **Optimized builds** for production
-
 ## Quick Start
 
-### Quick Start
-
-Use the project creation script:
+### Option 1: Clone and Use Script (Recommended)
 
 ```bash
 # Clone this template first
@@ -41,44 +31,30 @@ The script will:
 gh repo create your-project-name --public --source=. --remote=origin --push
 ```
 
-### Option 2: Manual Setup
+### Option 2: Use GitHub Template
 
-#### 1. Environment Setup
+1. Go to [https://github.com/dage/vibe-coding-template](https://github.com/dage/vibe-coding-template)
+2. Click "Use this template" → "Create a new repository"
+3. Name your repository and create it
+4. Clone your new repository locally
+5. Set up the environment manually
 
-1. Copy the environment template:
-   ```bash
-   cp env_template.txt .env
-   ```
-
-2. Edit `.env` and replace `YOUR_API_KEY_HERE` with your actual DeepInfra API key:
-   ```bash
-   # Get your API key from: https://deepinfra.com/
-   OPENAI_API_KEY=your_actual_api_key_here
-   ```
-
-#### 2. Activate Environment
-
+**For local development with GitHub template:**
 ```bash
-# Activate the vibes conda environment
+# Clone your GitHub repo
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+
+# Set up environment
+cp env_template.txt .env
+# Edit .env with your API key
+
+# Activate conda environment
 conda activate vibes
 
-# Or use the setup script
-./setup_env.sh
+# Start development
+python playloop.py
 ```
-
-#### 3. Create a Web App (Optional)
-
-If you don't have a web app yet, you can create a simple Vite app:
-
-```bash
-# Create a new Vite project in a subdirectory
-npm create vite@latest my-app -- --template vanilla
-cd my-app
-npm install
-npm run dev
-```
-
-#### 4. Run the Vibe Coding Loop
 
 #### Demo Mode (No API Key Required)
 ```bash
@@ -130,8 +106,8 @@ npm run dev
 
 ### Configuration
 - `env_template.txt` - Environment variables template
-- `.cursorrules` - **NEW**: Cursor IDE rules with project history lessons
-- `PROJECT_HISTORY_LESSONS.md` - **NEW**: Complete project development history
+- `.cursorrules` - Cursor IDE rules with project history lessons
+- `PROJECT_HISTORY_LESSONS.md` - Complete project development history
 
 ### Application
 - `test-app/` - Working Vite application (included in template)
