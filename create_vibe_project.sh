@@ -125,7 +125,7 @@ setup_environment() {
         print_warning "No .env or env_template.txt found. You may need to create .env manually"
     fi
     
-    # Check if conda environment exists
+    # Check if conda environment exists and activate it
     if command_exists conda; then
         if conda env list | grep -q "vibes"; then
             print_status "Activating vibes conda environment..."
@@ -133,12 +133,15 @@ setup_environment() {
             if [[ -f "$(conda info --base)/etc/profile.d/conda.sh" ]]; then
                 source "$(conda info --base)/etc/profile.d/conda.sh"
                 conda activate vibes
+                print_success "Conda environment activated"
             elif [[ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]]; then
                 source "$HOME/anaconda3/etc/profile.d/conda.sh"
                 conda activate vibes
+                print_success "Conda environment activated"
             elif [[ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]]; then
                 source "$HOME/miniconda3/etc/profile.d/conda.sh"
                 conda activate vibes
+                print_success "Conda environment activated"
             else
                 print_warning "Could not activate conda environment automatically. Please run: conda activate vibes"
             fi
@@ -150,22 +153,19 @@ setup_environment() {
     print_success "Environment setup completed"
 }
 
-# Run the start script
-run_start_script() {
-    print_status "Running start script..."
-    
-    if [[ -f "start_vibe_coding.sh" ]]; then
-        chmod +x start_vibe_coding.sh
-        ./start_vibe_coding.sh
-    elif [[ -f "run_vibe_test.sh" ]]; then
-        chmod +x run_vibe_test.sh
-        ./run_vibe_test.sh
-    else
-        print_warning "No start script found. You can run the project manually:"
-        print_warning "  python playloop.py"
-        print_warning "  or"
-        print_warning "  ./run_demo.sh"
-    fi
+# Provide next steps instead of running start script
+provide_next_steps() {
+    print_status "Project setup completed!"
+    print_status ""
+    print_status "Next steps:"
+    print_status "1. Activate conda environment: conda activate vibes"
+    print_status "2. Install dependencies: pip install -r requirements.txt"
+    print_status "3. Install Playwright: playwright install"
+    print_status "4. Start development:"
+    print_status "   - Demo mode: ./run_demo.sh"
+    print_status "   - Full mode: ./run_vibe_test.sh"
+    print_status ""
+    print_status "Note: The conda environment needs to be activated in each new terminal session."
 }
 
 # Main execution
@@ -177,13 +177,11 @@ main() {
     get_project_name
     setup_project
     setup_environment
-    run_start_script
+    provide_next_steps
     
     print_success "Project '$PROJECT_NAME' created successfully!"
-    print_status "Next steps:"
-    print_status "1. Activate conda environment: conda activate vibes"
-    print_status "2. Start coding with: python playloop.py"
-    print_status "3. To create GitHub repo: gh repo create $PROJECT_NAME --public --source=. --remote=origin --push"
+    print_status "To create GitHub repo later:"
+    print_status "  gh repo create $PROJECT_NAME --public --source=. --remote=origin --push"
 }
 
 # Run main function
