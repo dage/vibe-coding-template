@@ -6,22 +6,6 @@ This project provides a clean, working template for AI-assisted coding workflows
 
 ### Option 1: Clone and Use Script (Recommended)
 
-```bash
-# Clone this template first
-git clone https://github.com/dage/vibe-coding-template.git
-cd vibe-coding-template
-
-# Run the project creator
-./create_vibe_project.sh
-```
-
-The script will:
-- Ask for a project name (pre-filled with "vibe-")
-- Clone the template to a new directory
-- Set up local git repository
-- Set up the environment
-- Start the development workflow
-
 **Prerequisites:**
 - Git installed
 - Conda (optional but recommended)
@@ -29,10 +13,28 @@ The script will:
 
 **Setup API Key (One-time):**
 ```bash
-# Edit the template's .env file with your API key
+# Clone this template first
+git clone https://github.com/dage/vibe-coding-template.git
+cd vibe-coding-template
+
+# Set up your API key in the template
 cp env_template.txt .env
 # Edit .env and add your DeepInfra API key
 ```
+
+**Create New Projects:**
+```bash
+# Run the project creator (API key will be copied automatically)
+./create_vibe_project.sh
+```
+
+The script will:
+- Ask for a project name (pre-filled with "vibe-")
+- Clone the template to a new directory
+- Set up local git repository
+- Copy your API key automatically
+- Set up the environment
+- Start the development workflow
 
 **To create a GitHub repository later:**
 ```bash
@@ -64,18 +66,15 @@ conda activate vibes
 python playloop.py
 ```
 
-**Prerequisites:**
-- Git installed
-- Conda (optional but recommended)
-- DeepInfra API key (get one at [https://deepinfra.com/](https://deepinfra.com/))
+## Usage
 
-#### Demo Mode (No API Key Required)
+### Demo Mode (No API Key Required)
 ```bash
 # Run the demo to see how the system works
 ./run_demo.sh
 ```
 
-#### Full Mode (Requires API Key)
+### Full Mode (Requires API Key)
 1. Start your development server (if using Vite):
    ```bash
    npm run dev
