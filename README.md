@@ -127,7 +127,6 @@ python playloop.py
 - `run_demo.sh` - Demo runner script
 - `run_vibe_test.sh` - Full vibe loop runner
 - `setup_env.sh` - Environment activation helper
-- `setup_deepinfra.sh` - DeepInfra API setup (alternative)
 
 ### Configuration
 - `env_template.txt` - Environment variables template
