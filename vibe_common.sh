@@ -56,7 +56,19 @@ install_test_app_deps() {
     cd test-app
     if [[ ! -d "node_modules" ]]; then
         print_status "Installing test-app dependencies..."
-        npm install
+        # Add timeout and verbose output to prevent hanging
+        timeout 300 npm install --verbose || {
+            print_error "npm install failed or timed out after 5 minutes"
+            print_warning "Trying npm install with --no-optional..."
+            timeout 300 npm install --no-optional --verbose || {
+                print_error "npm install still failing. Please check your network and try manually:"
+                print_error "cd test-app && npm install"
+                cd ..
+                exit 1
+            }
+        }
+    else
+        print_status "Dependencies already installed"
     fi
     cd ..
 }

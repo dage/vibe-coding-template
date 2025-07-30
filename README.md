@@ -91,9 +91,14 @@ python playloop.py
 
 2. Run the automated coding loop:
    ```bash
-   python playloop.py
-   # or
+   # Test single iteration (like old run_vibe_test.sh)
    ./vibe_coding.sh
+   
+   # Demo mode (no API key required, like old run_demo.sh)
+   ./vibe_coding.sh --mode demo
+   
+   # Start autonomous AI iteration loop (like old start_vibe_coding.sh)
+   ./vibe_coding.sh --mode loop
    ```
 
 ## How It Works
