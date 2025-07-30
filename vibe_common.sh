@@ -85,13 +85,19 @@ start_test_app() {
     print_status "Waiting for app to start..."
     sleep 5
     
-    # Check if app is running
-    if curl -s http://localhost:5173 > /dev/null; then
+    # Check if app is running with timeout
+    print_status "Checking if app is responding..."
+    if timeout 10 curl -s http://localhost:5173 > /dev/null; then
         print_success "Test app is running at http://localhost:5173"
         echo $DEV_PID
     else
-        print_error "Test app failed to start"
-        kill $DEV_PID 2>/dev/null
+        print_error "Test app failed to start or is not responding"
+        print_warning "Checking if process is still running..."
+        if kill -0 $DEV_PID 2>/dev/null; then
+            print_warning "Process is running but app is not responding. Killing process..."
+            kill $DEV_PID 2>/dev/null
+        fi
+        print_error "Please check the test-app manually: cd test-app && npm run dev"
         exit 1
     fi
 }
@@ -137,7 +143,7 @@ get_custom_prompt() {
 
 # Function to check if test app is already running
 check_app_running() {
-    if curl -s http://localhost:5173 > /dev/null; then
+    if timeout 5 curl -s http://localhost:5173 > /dev/null; then
         print_success "Test app is already running at http://localhost:5173"
         return 0
     else
