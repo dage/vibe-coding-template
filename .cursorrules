@@ -33,6 +33,33 @@ When implementing new features or changes to the template:
 
 4. **Document Process**: Update this file and `PROJECT_HISTORY_LESSONS.md` with the new approach
 
+## Third-Party Software Installation Guidelines
+
+### Critical Rule: Always Use Official Installation Instructions
+
+When installing any third-party software (especially Aider):
+
+1. **Search for Official Documentation**: Always search online for the latest official installation instructions
+2. **Follow Official Methods**: Use the recommended installation methods from official sources
+3. **Avoid Package Manager Assumptions**: Don't assume pip/conda packages are the correct way to install
+4. **Check for Breaking Changes**: Verify if the software has changed installation methods recently
+
+### Aider Installation Reference
+
+**Official Aider Installation**: https://aider.chat/docs/install.html
+
+**Recommended Installation Method**:
+```bash
+# Install aider-install first
+python -m pip install aider-install
+aider-install
+
+# Or use the one-liner
+curl -LsSf https://aider.chat/install.sh | sh
+```
+
+**Important**: Aider installation requires restarting the shell/terminal after installation.
+
 ## Critical Project History Lessons
 
 **DO NOT REPEAT THESE MISTAKES:**
@@ -45,6 +72,8 @@ When implementing new features or changes to the template:
 
 4. **AVOID inconsistent AI tool integration** - Multiple attempts to fix Aider integration created unreliable AI-assisted development workflows.
 
+5. **NEVER install third-party software without checking official instructions** - The aider installation fiasco showed that using outdated package names and versions leads to broken systems. Always follow official installation guides.
+
 ## Development Guidelines
 
 ### Core Principles
@@ -55,6 +84,7 @@ When implementing new features or changes to the template:
 4. **Focus on Core Functionality** - The main goal is AI-assisted coding workflows, not complex visualizations
 5. **Always Activate Conda Environment** - Before running any Python scripts, ensure the "vibes" conda environment is activated: `conda activate vibes`
 6. **No Automatic Commits** - Never automatically commit changes. Always let the user review and commit manually
+7. **Follow Official Installation Guides** - Always search for and follow the latest official installation instructions for third-party software
 
 ### File Structure to Maintain
 
@@ -80,6 +110,7 @@ vibe_coding_template/
 2. **Over-engineered workflows** - Don't create multiple complex workflow scripts
 3. **Unnecessary features** - Don't add complex visualizations or features without clear need
 4. **Breaking changes** - Don't make changes that break the core AI loop functionality
+5. **Outdated installation methods** - Don't use old package names or installation methods without verifying current official instructions
 
 ### Testing Requirements
 
@@ -89,6 +120,7 @@ vibe_coding_template/
 4. **Always activate conda environment** - Run `conda activate vibes` before testing any Python scripts (in playground projects only)
 5. **File integrity awareness** - Files can get corrupted during development (e.g., vibe_common.sh containing only '%'). Always verify file contents after making changes.
 6. **Avoid over-engineering fixes** - When fixing simple issues (like port conflicts), avoid complex solutions. Prefer simple approaches over complex port management or timeout handling.
+7. **Verify third-party installations** - After installing third-party software, verify it works correctly before proceeding
 
 ### When Making Changes
 
