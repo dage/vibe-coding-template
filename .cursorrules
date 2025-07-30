@@ -95,7 +95,6 @@ vibe_coding_template/
 ├── test_setup.py (environment testing)
 ├── create_vibe_project.sh (project creation helper)
 ├── test-app/ (simple Vite app - MUST stay in git)
-├── setup_env.sh (environment activation)
 ├── run_demo.sh (demo runner)
 ├── vibe_coding.sh (main vibe coding workflow)
 ├── requirements.txt (Python dependencies)

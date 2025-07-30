@@ -391,7 +391,7 @@ This document provides the complete development history of the Vibe Coding Templ
 - **Impact**: Better environment management
 - **Analysis**: Shows focus on proper environment setup
 
-#### Commit 16013a1 (July 29, 2025) - Remove setup_deepinfra.sh to avoid over-engineering and complexity - setup_env.sh is sufficient
+#### Commit 16013a1 (July 29, 2025) - Remove setup_deepinfra.sh to avoid over-engineering and complexity
 - **Author**: Dag Erlandsen
 - **Date**: July 29, 2025
 - **Type**: Simplification
@@ -423,7 +423,7 @@ This document provides the complete development history of the Vibe Coding Templ
 - **Impact**: Much better project creation experience
 - **Analysis**: Shows major focus on automation and user experience
 
-#### Commit d18d825 (July 29, 2025) - Add test-app dependency installation and improve setup_env.sh conda handling
+#### Commit d18d825 (July 29, 2025) - Add test-app dependency installation and improve conda handling
 - **Author**: Dag Erlandsen
 - **Date**: July 29, 2025
 - **Type**: Dependency management
