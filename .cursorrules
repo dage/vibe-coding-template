@@ -1,5 +1,11 @@
 # Vibe Coding Template - Cursor Rules for AI Agents
 
+## Project Overview
+
+**Vibe Coding Template** is an AI-assisted development workflow system that enables autonomous iteration loops for web application development. The core concept is to create a feedback loop where an AI agent continuously analyzes a running web application through screenshots and console logs, identifies UX/UI/logic issues, generates specific code improvements, and automatically applies those changes using Aider. This creates a "vibe coding" experience where developers can set the AI loose on their application and watch it iteratively improve the codebase while they focus on higher-level direction and review. The developer can "take over the steering wheel" at any time, do manual coding in Aider, and restart the autonomous AI agent iteration loop in any direction - creating a seamless hybrid workflow between human and AI development.
+
+The system uses the best code generation and vision analysis models available at DeepInfra to provide a cost-effective alternative to traditional frontier models. The template includes a simple Vite-based test application, automated screenshot capture via Playwright, and integration with Aider for seamless code application.
+
 ## AI Agent Development Process
 
 ### New Development Workflow (July 30, 2025)
@@ -27,11 +33,7 @@ When implementing new features or changes to the template:
 
 4. **Document Process**: Update this file and `PROJECT_HISTORY_LESSONS.md` with the new approach
 
-## Project Context and History
-
-This is the Vibe Coding Template project - a system designed to enable AI-assisted coding workflows with autonomous iteration loops. The project has experienced significant degradation in functionality over time due to over-engineering and poor architectural decisions.
-
-### Critical Project History Lessons
+## Critical Project History Lessons
 
 **DO NOT REPEAT THESE MISTAKES:**
 
@@ -42,27 +44,6 @@ This is the Vibe Coding Template project - a system designed to enable AI-assist
 3. **DON'T add complex features without clear need** - The Mandelbrot set implementation (commit `73c89a03a0031ddf2f40001ebe97bd2d41c9ea96`) may have introduced performance issues and was unnecessary for the core functionality.
 
 4. **AVOID inconsistent AI tool integration** - Multiple attempts to fix Aider integration created unreliable AI-assisted development workflows.
-
-### Working State Reference
-
-The last known working state was around commit `6f170e40a4d8cf1e4bd2d422d3ecd24e655fba08` which had:
-- Clean, simple template structure
-- Working test-app with Vite
-- Basic AI loop functionality
-- Clear documentation
-- Test-app properly under version control
-
-### Current State (Updated - July 29, 2025)
-
-The project has been successfully cleaned up and now has:
-- ✅ Clean, simple template structure
-- ✅ Working test-app with Vite (properly tracked in git)
-- ✅ Simplified workflow scripts
-- ✅ Proper conda environment handling with `conda run`
-- ✅ Project name sanitization (lowercase, underscores) - directory names use underscores, GitHub repos keep dashes
-- ✅ Automatic dependency installation in vibes environment
-- ✅ Clear documentation and setup instructions
-- ✅ Removed over-engineered components (setup_deepinfra.sh, complex workflows)
 
 ## Development Guidelines
 
@@ -103,12 +84,11 @@ vibe_coding_template/
 ### Testing Requirements
 
 1. **NEVER run scripts in the template folder** - The template folder is for development only, not testing
-2. **Human testing required** - All scripts must be tested by human developers in project instances, not in the template
-3. **Template integrity** - The template must remain clean and functional for all users
-4. **Test in project instances** - Use `create_vibe_project.sh` to create test projects, then test there
-5. **Always activate conda environment** - Run `conda activate vibes` before testing any Python scripts (in project instances only)
-6. **File integrity awareness** - Files can get corrupted during development (e.g., vibe_common.sh containing only '%'). Always verify file contents after making changes.
-7. **Avoid over-engineering fixes** - When fixing simple issues (like port conflicts), avoid complex solutions. Prefer simple approaches over complex port management or timeout handling.
+2. **Template integrity** - The template must remain clean and functional for all users
+3. **Test in playground projects** - Use `create_vibe_project.sh` to create test projects, then test there
+4. **Always activate conda environment** - Run `conda activate vibes` before testing any Python scripts (in playground projects only)
+5. **File integrity awareness** - Files can get corrupted during development (e.g., vibe_common.sh containing only '%'). Always verify file contents after making changes.
+6. **Avoid over-engineering fixes** - When fixing simple issues (like port conflicts), avoid complex solutions. Prefer simple approaches over complex port management or timeout handling.
 
 ### When Making Changes
 
@@ -149,15 +129,5 @@ If the project becomes broken again:
 - Keep README.md clear and up-to-date
 - Don't create multiple documentation files unless necessary
 - Focus on getting new developers up and running quickly
-
-## Success Metrics
-
-A successful change should:
-1. Maintain or improve the core AI loop functionality
-2. Keep the test-app working and under version control
-3. Not add unnecessary complexity
-4. Make the project easier to understand and use
-5. **Preserve template integrity** - Template must remain clean and functional
-6. **Enable human testing** - Changes must be testable by human developers in project instances
 
 Remember: This project is about AI-assisted coding workflows, not about creating the most complex or feature-rich system. Keep it simple, focused, and working. 
