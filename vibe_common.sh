@@ -56,17 +56,31 @@ install_test_app_deps() {
     cd test-app
     if [[ ! -d "node_modules" ]]; then
         print_status "Installing test-app dependencies..."
-        # Add timeout and verbose output to prevent hanging
-        timeout 300 npm install --verbose || {
-            print_error "npm install failed or timed out after 5 minutes"
-            print_warning "Trying npm install with --no-optional..."
-            timeout 300 npm install --no-optional --verbose || {
-                print_error "npm install still failing. Please check your network and try manually:"
-                print_error "cd test-app && npm install"
-                cd ..
-                exit 1
+        # Add timeout and verbose output to prevent hanging (macOS compatible)
+        if command -v timeout >/dev/null 2>&1; then
+            timeout 300 npm install --verbose || {
+                print_error "npm install failed or timed out after 5 minutes"
+                print_warning "Trying npm install with --no-optional..."
+                timeout 300 npm install --no-optional --verbose || {
+                    print_error "npm install still failing. Please check your network and try manually:"
+                    print_error "cd test-app && npm install"
+                    cd ..
+                    exit 1
+                }
             }
-        }
+        else
+            # macOS fallback without timeout
+            npm install --verbose || {
+                print_error "npm install failed"
+                print_warning "Trying npm install with --no-optional..."
+                npm install --no-optional --verbose || {
+                    print_error "npm install still failing. Please check your network and try manually:"
+                    print_error "cd test-app && npm install"
+                    cd ..
+                    exit 1
+                }
+            }
+        fi
     else
         print_status "Dependencies already installed"
     fi
@@ -85,20 +99,37 @@ start_test_app() {
     print_status "Waiting for app to start..."
     sleep 5
     
-    # Check if app is running with timeout
+    # Check if app is running with timeout (macOS compatible)
     print_status "Checking if app is responding..."
-    if timeout 10 curl -s http://localhost:5173 > /dev/null; then
-        print_success "Test app is running at http://localhost:5173"
-        echo $DEV_PID
-    else
-        print_error "Test app failed to start or is not responding"
-        print_warning "Checking if process is still running..."
-        if kill -0 $DEV_PID 2>/dev/null; then
-            print_warning "Process is running but app is not responding. Killing process..."
-            kill $DEV_PID 2>/dev/null
+    if command -v timeout >/dev/null 2>&1; then
+        if timeout 10 curl -s http://localhost:5173 > /dev/null; then
+            print_success "Test app is running at http://localhost:5173"
+            echo $DEV_PID
+        else
+            print_error "Test app failed to start or is not responding"
+            print_warning "Checking if process is still running..."
+            if kill -0 $DEV_PID 2>/dev/null; then
+                print_warning "Process is running but app is not responding. Killing process..."
+                kill $DEV_PID 2>/dev/null
+            fi
+            print_error "Please check the test-app manually: cd test-app && npm run dev"
+            exit 1
         fi
-        print_error "Please check the test-app manually: cd test-app && npm run dev"
-        exit 1
+    else
+        # macOS fallback without timeout
+        if curl -s http://localhost:5173 > /dev/null; then
+            print_success "Test app is running at http://localhost:5173"
+            echo $DEV_PID
+        else
+            print_error "Test app failed to start or is not responding"
+            print_warning "Checking if process is still running..."
+            if kill -0 $DEV_PID 2>/dev/null; then
+                print_warning "Process is running but app is not responding. Killing process..."
+                kill $DEV_PID 2>/dev/null
+            fi
+            print_error "Please check the test-app manually: cd test-app && npm run dev"
+            exit 1
+        fi
     fi
 }
 
@@ -143,11 +174,21 @@ get_custom_prompt() {
 
 # Function to check if test app is already running
 check_app_running() {
-    if timeout 5 curl -s http://localhost:5173 > /dev/null; then
-        print_success "Test app is already running at http://localhost:5173"
-        return 0
+    if command -v timeout >/dev/null 2>&1; then
+        if timeout 5 curl -s http://localhost:5173 > /dev/null; then
+            print_success "Test app is already running at http://localhost:5173"
+            return 0
+        else
+            return 1
+        fi
     else
-        return 1
+        # macOS fallback without timeout
+        if curl -s http://localhost:5173 > /dev/null; then
+            print_success "Test app is already running at http://localhost:5173"
+            return 0
+        else
+            return 1
+        fi
     fi
 }
 
