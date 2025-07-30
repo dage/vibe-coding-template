@@ -6,8 +6,8 @@ import base64
 import json
 import subprocess
 import time
-import textwrap
 import os
+import sys
 from pathlib import Path
 from openai import OpenAI
 from playwright.async_api import async_playwright
@@ -127,8 +127,25 @@ def vision_analyze(img_path, logs_path):
         # Fallback: try to parse the entire response
         return json.loads(txt)
 
-def code_instruction(vision_json, model=CODE_MODEL_QWEN):
-    prompt = CODE_PROMPT.format(vision_json=json.dumps(vision_json, ensure_ascii=False, indent=2))
+def code_instruction(vision_json, custom_prompt=None, model=CODE_MODEL_QWEN):
+    if custom_prompt:
+        # Use custom prompt instead of vision analysis
+        prompt = f"""Given this custom direction: "{custom_prompt}"
+
+Produce ONE short instruction for Aider to apply.
+Rules:
+- List the files to modify at top as a bullet list.
+- Then, numbered steps with precise edits.
+- Include any new files to create.
+- End with a short test plan (npm scripts).
+Keep it compact and deterministic.
+
+Current app state analysis:
+{json.dumps(vision_json, ensure_ascii=False, indent=2)}"""
+    else:
+        # Use original vision-based prompt
+        prompt = CODE_PROMPT.format(vision_json=json.dumps(vision_json, ensure_ascii=False, indent=2))
+    
     resp = client.chat.completions.create(
         model=model,
         messages=[{"role":"system","content":CODE_SYSTEM},
@@ -161,7 +178,14 @@ def run_aider(instr, files=None, model=CODE_MODEL_QWEN):
         return subprocess.call(cmd)
 
 async def main():
-    print("🎯 Starting vibe coding loop...")
+    # Check for custom prompt argument
+    custom_prompt = None
+    if len(sys.argv) > 1:
+        custom_prompt = sys.argv[1]
+        print(f"🎯 Starting vibe coding loop with custom direction: {custom_prompt}")
+    else:
+        print("🎯 Starting vibe coding loop...")
+    
     print(f"📸 Capturing screenshot from {APP_URL}")
     
     img, logs = await grab_screenshot_and_logs()
@@ -173,7 +197,7 @@ async def main():
     print(f"✅ Vision analysis complete: {len(vjson.get('issues', []))} issues found")
     
     print("💻 Generating code instruction...")
-    instr = code_instruction(vjson, model=CODE_MODEL_QWEN)
+    instr = code_instruction(vjson, custom_prompt=custom_prompt, model=CODE_MODEL_QWEN)
     print("✅ Code instruction generated")
     
     # Extract files from JSON to focus edits
