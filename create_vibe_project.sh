@@ -27,9 +27,37 @@ print_error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
 
+# Function to show usage
+show_usage() {
+    echo "Usage: $0 [PROJECT_NAME]"
+    echo ""
+    echo "Options:"
+    echo "  PROJECT_NAME    Project name (optional, will prompt if not provided)"
+    echo "                  If provided, should be in format 'vibe-ai-playground-X' or just 'X'"
+    echo "                  If just 'X' is provided, will auto-generate 'vibe-ai-playground-X'"
+    echo ""
+    echo "Examples:"
+    echo "  $0                    # Interactive mode - prompts for project name"
+    echo "  $0 vibe-ai-playground-5  # Create project with specific name"
+    echo "  $0 5                  # Auto-generate vibe-ai-playground-5"
+    echo ""
+}
+
 # Function to check if command exists
 command_exists() {
     command -v "$1" >/dev/null 2>&1
+}
+
+# Function to find next available playground number
+find_next_playground_number() {
+    local next_num=1
+    
+    # Check existing vibe-ai-playground directories
+    while [[ -d "../vibe_ai_playground_$next_num" ]]; do
+        next_num=$((next_num + 1))
+    done
+    
+    echo $next_num
 }
 
 # Check prerequisites
@@ -48,15 +76,32 @@ check_prerequisites() {
     print_success "Prerequisites check completed"
 }
 
-# Get project name from user
+# Get project name from user or command line
 get_project_name() {
-    print_status "Enter project name (should start with 'vibe-'):"
-    echo -n "vibe-"
-    read PROJECT_NAME
+    local provided_name="$1"
     
-    # Prepend "vibe-" if user didn't include it
-    if [[ ! "$PROJECT_NAME" =~ ^vibe- ]]; then
-        PROJECT_NAME="vibe-$PROJECT_NAME"
+    if [[ -z "$provided_name" ]]; then
+        # Interactive mode - prompt user
+        print_status "Enter project name (should start with 'vibe-'):"
+        echo -n "vibe-"
+        read PROJECT_NAME
+        
+        # Prepend "vibe-" if user didn't include it
+        if [[ ! "$PROJECT_NAME" =~ ^vibe- ]]; then
+            PROJECT_NAME="vibe-$PROJECT_NAME"
+        fi
+    else
+        # Command line mode
+        if [[ "$provided_name" =~ ^[0-9]+$ ]]; then
+            # Just a number provided - auto-generate vibe-ai-playground-X
+            PROJECT_NAME="vibe-ai-playground-$provided_name"
+        elif [[ "$provided_name" =~ ^vibe-ai-playground-[0-9]+$ ]]; then
+            # Full name provided
+            PROJECT_NAME="$provided_name"
+        else
+            # Other format - use as provided
+            PROJECT_NAME="$provided_name"
+        fi
     fi
     
     # Store original name for GitHub repo (keep dashes)
@@ -188,11 +233,17 @@ provide_next_steps() {
 
 # Main execution
 main() {
+    # Parse command line arguments
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        show_usage
+        exit 0
+    fi
+    
     echo "🚀 Vibe Project Creator"
     echo "========================"
     
     check_prerequisites
-    get_project_name
+    get_project_name "$1"
     setup_project
     setup_environment
     provide_next_steps

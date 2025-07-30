@@ -1,5 +1,32 @@
 # Vibe Coding Template - Cursor Rules for AI Agents
 
+## AI Agent Development Process
+
+### New Development Workflow (July 30, 2025)
+
+When implementing new features or changes to the template:
+
+1. **Create Playground Project**: Use the updated `create_vibe_project.sh` script to create a new playground:
+   ```bash
+   ./create_vibe_project.sh 1  # Creates vibe_ai_playground_1
+   # or
+   ./create_vibe_project.sh    # Interactive mode
+   ```
+
+2. **Test in Playground**: Work in the playground directory (`../vibe_ai_playground_X/`) to:
+   - Implement and test new features
+   - Iterate on changes until they work correctly
+   - Verify functionality with actual testing
+   - Ensure changes are minimal and high-quality
+
+3. **Apply to Template**: Once tested and working in the playground:
+   - Make minimal, targeted changes to the main template
+   - Apply only the proven, tested changes
+   - Avoid over-engineering or complex solutions
+   - Maintain high confidence that changes will work
+
+4. **Document Process**: Update this file and `PROJECT_HISTORY_LESSONS.md` with the new approach
+
 ## Project Context and History
 
 This is the Vibe Coding Template project - a system designed to enable AI-assisted coding workflows with autonomous iteration loops. The project has experienced significant degradation in functionality over time due to over-engineering and poor architectural decisions.
