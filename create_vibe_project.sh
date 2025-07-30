@@ -119,9 +119,9 @@ setup_environment() {
     print_success "Execute permissions set"
     
     # Check if .env exists in the template directory and copy it
-    if [[ -f "../.env" ]]; then
+    if [[ -f "../vibe_coding_template/.env" ]]; then
         print_status "Copying .env from template directory..."
-        cp ../.env .env
+        cp ../vibe_coding_template/.env .env
         print_success "API key copied from template"
     elif [[ -f "env_template.txt" ]]; then
         print_status "Creating .env from template..."
