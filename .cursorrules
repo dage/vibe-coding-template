@@ -80,6 +80,8 @@ vibe_coding_template/
 3. **Template integrity** - The template must remain clean and functional for all users
 4. **Test in project instances** - Use `create_vibe_project.sh` to create test projects, then test there
 5. **Always activate conda environment** - Run `conda activate vibes` before testing any Python scripts (in project instances only)
+6. **File integrity awareness** - Files can get corrupted during development (e.g., vibe_common.sh containing only '%'). Always verify file contents after making changes.
+7. **Avoid over-engineering fixes** - When fixing simple issues (like port conflicts), avoid complex solutions. Prefer simple approaches over complex port management or timeout handling.
 
 ### When Making Changes
 

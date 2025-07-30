@@ -292,6 +292,12 @@ This document provides the complete development history of the Vibe Coding Templ
 - **Impact:** Inconsistent AI tool integration
 - **Result:** Unreliable AI-assisted development workflow
 
+### 5. Over-Engineering During Development (July 30, 2025)
+- **Issue:** Complex port management and timeout handling added without testing
+- **Impact:** Increased complexity without clear benefits, required reverting changes
+- **Result:** Need to start with simpler approaches (e.g., kill existing processes) before implementing complex solutions
+- **Lesson:** When fixing simple issues, avoid adding complex fallback mechanisms and multiple timeout handling layers
+
 ## Current State Analysis
 
 ### Working Components (Early Commits)
