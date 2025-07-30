@@ -19,7 +19,7 @@ This document provides the complete development history of the Vibe Coding Templ
 - **Message:** Initial commit: Vibe Coding Template
 - **Changes:** Complete initial template setup with 23 files
   - Core Python scripts: `playloop.py`, `demo_vibe_loop.py`, `test_setup.py`
-  - Shell scripts: `run_demo.sh`, `run_vibe_test.sh`, `setup_deepinfra.sh`, `setup_env.sh`
+  - Shell scripts: `run_demo.sh`, `vibe_coding.sh`, `setup_deepinfra.sh`, `setup_env.sh`
   - Documentation: `README.md`, `env_template.txt`
   - Test application: Complete Vite-based test app with package.json, HTML, CSS, JS
   - Configuration: `.gitignore`, `.aider.chat.history.md`
@@ -58,7 +58,7 @@ This document provides the complete development history of the Vibe Coding Templ
 - **Changes:** Fixed multiple scripts:
   - `demo_vibe_loop.py`: Improved error handling
   - `playloop.py`: Enhanced robustness
-  - `run_demo.sh`, `run_vibe_test.sh`: Added proper shebangs
+  - `run_demo.sh`, `vibe_coding.sh`: Added proper shebangs
   - `setup_deepinfra.sh`, `setup_env.sh`: Fixed execution issues
 - **Status:** More robust scripts
 
@@ -379,7 +379,7 @@ The project has been successfully restored to a clean, working state through sys
 #### ✅ **Current Working State:**
 - Clean template structure with essential files only
 - Working test-app with Vite (properly tracked)
-- Simplified workflow scripts (`run_demo.sh`, `run_vibe_test.sh`)
+- Simplified workflow scripts (`run_demo.sh`, `vibe_coding.sh`)
 - Proper conda environment management
 - Clear documentation and setup instructions
 

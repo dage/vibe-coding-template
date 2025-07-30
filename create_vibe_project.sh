@@ -181,7 +181,7 @@ provide_next_steps() {
     print_status "1. Activate the vibes environment: conda activate vibes"
     print_status "2. Start development:"
     print_status "   - Demo mode: ./run_demo.sh"
-    print_status "   - Full mode: ./run_vibe_test.sh"
+    print_status "   - Full mode: ./vibe_coding.sh"
     print_status ""
     print_status "Note: You must activate 'conda activate vibes' in each new terminal session."
 }
@@ -206,7 +206,7 @@ main() {
     print_status "Next steps:"
     print_status "1. Change to the project directory: cd ../$PROJECT_NAME"
     print_status "2. Activate the vibes environment: conda activate vibes"
-    print_status "3. Start development: ./run_demo.sh or ./run_vibe_test.sh"
+    print_status "3. Start development: ./run_demo.sh or ./vibe_coding.sh"
 }
 
 # Run main function

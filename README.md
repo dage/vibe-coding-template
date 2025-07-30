@@ -93,7 +93,7 @@ python playloop.py
    ```bash
    python playloop.py
    # or
-   ./run_vibe_test.sh
+   ./vibe_coding.sh
    ```
 
 ## How It Works
@@ -120,7 +120,7 @@ python playloop.py
 ### Scripts
 - `create_vibe_project.sh` - Project creation helper (creates local repo, GitHub optional)
 - `run_demo.sh` - Demo runner (no API key required, uses mock data)
-- `run_vibe_test.sh` - Full vibe loop runner (starts test app + runs AI loop)
+- `vibe_coding.sh` - Main vibe coding workflow (single, loop, demo, continue modes)
 - `setup_env.sh` - Environment activation helper
 
 ### Configuration

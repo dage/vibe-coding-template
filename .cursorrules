@@ -59,7 +59,7 @@ vibe_coding_template/
 ├── test-app/ (simple Vite app - MUST stay in git)
 ├── setup_env.sh (environment activation)
 ├── run_demo.sh (demo runner)
-├── run_vibe_test.sh (full vibe loop runner)
+├── vibe_coding.sh (main vibe coding workflow)
 ├── requirements.txt (Python dependencies)
 ├── .cursorrules (AI agent guidelines)
 ├── PROJECT_HISTORY_LESSONS.md (development history)
@@ -75,20 +75,20 @@ vibe_coding_template/
 
 ### Testing Requirements
 
-1. **Always test the AI loop** - Verify that `playloop.py` works correctly
-2. **Test app creation** - Ensure the test-app is working and properly structured
-3. **Test environment setup** - Verify all setup scripts work
-4. **Test the demo** - Ensure `demo_vibe_loop.py` runs successfully
-5. **Always activate conda environment** - Run `conda activate vibes` before testing any Python scripts
+1. **NEVER run scripts in the template folder** - The template folder is for development only, not testing
+2. **Human testing required** - All scripts must be tested by human developers in project instances, not in the template
+3. **Template integrity** - The template must remain clean and functional for all users
+4. **Test in project instances** - Use `create_vibe_project.sh` to create test projects, then test there
+5. **Always activate conda environment** - Run `conda activate vibes` before testing any Python scripts (in project instances only)
 
 ### When Making Changes
 
 1. **Start with the working state** - Use commit `6f170e40a4d8cf1e4bd2d422d3ecd24e655fba08` as reference
 2. **Make one change at a time** - Don't make multiple unrelated changes
-3. **Test immediately** - Test functionality after each change
+3. **NEVER test in template** - Template is for development only, not testing
 4. **Document changes** - Update README.md and other documentation
 5. **Keep it simple** - If a change makes things more complex, reconsider it
-6. **Let user review** - Never commit automatically. Always let the user review changes first
+6. **Let user review and test** - Never commit automatically. Always let the user review and test changes in project instances
 
 ### Emergency Recovery
 
@@ -128,6 +128,7 @@ A successful change should:
 2. Keep the test-app working and under version control
 3. Not add unnecessary complexity
 4. Make the project easier to understand and use
-5. Pass all basic functionality tests
+5. **Preserve template integrity** - Template must remain clean and functional
+6. **Enable human testing** - Changes must be testable by human developers in project instances
 
 Remember: This project is about AI-assisted coding workflows, not about creating the most complex or feature-rich system. Keep it simple, focused, and working. 
