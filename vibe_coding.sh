@@ -16,7 +16,7 @@ show_usage() {
     echo ""
     echo "Options:"
     echo "  -h, --help              Show this help message"
-    echo "  -m, --mode MODE         Mode: single, loop, demo, or continue (default: single)"
+    echo "  -m, --mode MODE         Mode: single, loop, or continue (default: single)"
     echo "  -p, --prompt PROMPT     Custom prompt for AI direction"
     echo "  -i, --iterations N      Max iterations for loop mode (default: 10)"
     echo "  -d, --delay SECONDS     Delay between iterations (default: 30)"
@@ -24,12 +24,10 @@ show_usage() {
     echo "Modes:"
     echo "  single     Run one iteration and exit (default) - equivalent to old run_vibe_test.sh"
     echo "  loop       Run continuous autonomous iterations - equivalent to old start_vibe_coding.sh"
-    echo "  demo       Run demo mode (no API key required) - equivalent to old run_demo.sh"
     echo "  continue   Resume after human intervention with new direction - equivalent to old continue_vibe_coding.sh"
     echo ""
     echo "Quick Start Examples:"
     echo "  $0                                    # Test single iteration (like old run_vibe_test.sh)"
-    echo "  $0 --mode demo                        # Demo mode (like old run_demo.sh)"
     echo "  $0 --mode loop                        # Start autonomous AI iteration loop"
     echo ""
     echo "Advanced Examples:"
@@ -72,7 +70,7 @@ done
 
 # Validate mode
 case $MODE in
-    single|loop|demo|continue)
+    single|loop|continue)
         ;;
     *)
         print_error "Invalid mode: $MODE"
@@ -119,11 +117,7 @@ run_iterations() {
         echo "=================================="
         
         # Run the vibe loop
-        if [ "$MODE" = "demo" ]; then
-            run_vibe_loop "demo"
-        else
-            run_vibe_loop "full" "$CUSTOM_PROMPT"
-        fi
+        run_vibe_loop "full" "$CUSTOM_PROMPT"
         
         # Check if we should continue
         if [ $iteration -lt $MAX_ITERATIONS ]; then
@@ -160,14 +154,7 @@ case $MODE in
         echo ""
         run_iterations
         ;;
-    demo)
-        echo ""
-        echo "🎯 Running demo vibe coding loop..."
-        echo "This demonstrates how the AI analyzes the app."
-        echo "No API key required - using mock data."
-        echo ""
-        run_vibe_loop "demo"
-        ;;
+
 esac
 
 # Cleanup
