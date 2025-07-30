@@ -145,20 +145,14 @@ stop_test_app() {
 
 # Function to run vibe loop
 run_vibe_loop() {
-    local mode=$1
-    local custom_prompt=$2
+    local custom_prompt=$1
     
-    if [ "$mode" = "demo" ]; then
-        print_status "Running demo vibe coding loop..."
-        python demo_vibe_loop.py
+    print_status "Running vibe coding loop..."
+    if [ ! -z "$custom_prompt" ]; then
+        print_status "Using custom prompt: $custom_prompt"
+        python playloop.py "$custom_prompt"
     else
-        print_status "Running vibe coding loop..."
-        if [ ! -z "$custom_prompt" ]; then
-            print_status "Using custom prompt: $custom_prompt"
-            python playloop.py "$custom_prompt"
-        else
-            python playloop.py
-        fi
+        python playloop.py
     fi
 }
 
@@ -219,10 +213,10 @@ handle_continuation() {
     # Run the vibe loop with custom prompt
     if [ ! -z "$custom_prompt" ]; then
         print_status "Continuing with custom direction: $custom_prompt"
-        run_vibe_loop "full" "$custom_prompt"
+        run_vibe_loop "$custom_prompt"
     else
         print_status "Continuing with default AI direction"
-        run_vibe_loop "full"
+        run_vibe_loop
     fi
     
     # Cleanup if we started the app

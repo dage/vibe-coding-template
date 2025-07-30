@@ -117,7 +117,7 @@ run_iterations() {
         echo "=================================="
         
         # Run the vibe loop
-        run_vibe_loop "full" "$CUSTOM_PROMPT"
+        run_vibe_loop "$CUSTOM_PROMPT"
         
         # Check if we should continue
         if [ $iteration -lt $MAX_ITERATIONS ]; then
@@ -143,7 +143,7 @@ case $MODE in
         echo "The AI will analyze the app and suggest improvements."
         echo "Press Ctrl+C to stop the loop."
         echo ""
-        run_vibe_loop "full" "$CUSTOM_PROMPT"
+        run_vibe_loop "$CUSTOM_PROMPT"
         ;;
     loop)
         echo ""
